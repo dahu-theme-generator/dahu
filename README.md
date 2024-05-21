@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # dahu README
 
 This is the README for your extension "dahu". After writing up a brief description, we recommend including the following sections.
@@ -71,6 +70,3 @@ You can author your README using Visual Studio Code. Here are some useful editor
 
 **Enjoy!**
 =======
-# dahu
-Advanced vscode colorscheme manager
->>>>>>> origin/main
