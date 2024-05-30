@@ -1,0 +1,37 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .sidenav {
+    background-color: gray;
+    color: black;
+    width: 25%;
+    border-top-right-radius:19px;
+    border-bottom-right-radius:19px;
+
+  }
+  @import url('https://fonts.cdnfonts.com/css/inknut-antiqua');
+  @import url('https://fonts.cdnfonts.com/css/jetbrains-mono');
+  h1 {
+    margin-left: 20%;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    font-family:'Inknut Antiqua', sans-serif;
+    //font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  h2 {
+    margin-left: 20%;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family:'JetBrains Mono';
+  }
+  .sidebar-cont {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
