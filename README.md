@@ -24,5 +24,5 @@ Dahu is advanced color theme extension for Visual Studio Code.
 - in the new window ```shift``` + ```ctrl``` + ```p``` select ```Open webview``` for webview preview.
 
 ### Notes for developers
-Colors of the extension are automatically adapted based on the current vs code theme. To add more colors you can access global css variables in src/styles.css inside ```:root{}```. More styles can be found at https://code.visualstudio.com/api/references/theme-color . Change
+Colors of the extension are automatically adapted based on the current vs code theme. To add more colors you can access global css variables in src/styles.css inside ```:root{}```. More styles can be found at https://code.visualstudio.com/api/references/theme-color. Change ```.``` to  ```-```.
 **Enjoy!**
