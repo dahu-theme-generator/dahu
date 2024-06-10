@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <!-- <head>
@@ -8,7 +7,7 @@
 <body>
     
 <mat-sidenav-container class="example-container">
-    <mat-sidenav class="sidenav" opened mode="side">
+    <!-- <mat-sidenav class="sidenav" opened mode="side">
         <h1>dahu</h1>
         <div class="sidebar-cont">
             <h2>Create a new theme</h2>
@@ -22,7 +21,31 @@
         <div class="sidebar-cont">
             <h2>Library</h2>
         </div>
+    </mat-sidenav> -->
+    <mat-sidenav class="sidenav" opened mode="side">
+        <!-- <mat-nav-list>
+            <a mat-list-item routerLink="/library"> Library</a>
+            <a mat-list-item routerLink="/create-theme"> Create a theme</a>
+            <a mat-list-item routerLink="/generate-theme"> Generate</a>
+            <a mat-list-item routerLink="/generate-from-pic"> Generate from picture</a>
+        </mat-nav-list> -->
+        <h1>dahu</h1>
+        <!-- <div>
+            <a routerLink="/generate-theme"> Create a new theme</a>
+        </div> -->
+        <div >
+            <h2>Generate</h2>
+        </div>
+        <div >
+            <h2>Generate from picture</h2>
+        </div>
+        <div>
+            <h2>Library</h2>
+        </div>
     </mat-sidenav>
+    <!-- <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content> -->
     
   </mat-sidenav-container>
 </body>
