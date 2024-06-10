@@ -1,0 +1,14 @@
+{
+    "name": "Extension Theme",
+    "type": "dark",
+    "colors": {
+        "editor.background": "#ffffff",
+        "sidebar.background": "#ffffff",
+        "panel.background": "#ffffff",
+        "statusBar.background": "#ffffff",
+        "editorGroupHeader.tabsBackground": "#ffffff"
+    },
+    "tokenColors": {
+
+    }
+}
