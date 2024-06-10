@@ -1,9 +1,9 @@
-import { initDB, closeDB } from "./databaseInit";
+import { initDB, closeDB } from "./dbConnector";
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-let db = initDB();
+// let db = initDB();
 
 // TODO: color change below
 // editor background
@@ -70,3 +70,5 @@ function changeTabs(color: string, context: vscode.ExtensionContext) {
         console.log('error while setting status bar background: ' + (err as Error).message);
     }
 }
+
+export { changeEditor, changeSidebar, changePanel, changeStatusBar, changeTabs};
