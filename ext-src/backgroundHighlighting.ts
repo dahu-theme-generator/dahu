@@ -31,10 +31,10 @@ function changeSidebar(color: string, context: vscode.ExtensionContext) {
     const themePath = path.join(context.extensionPath, 'themes', 'extensiontheme.json');
     try {
         const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
-        themeData.colors['sidebar.background'] = color;
+        themeData.colors['sideBar.background'] = color;
         fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2), 'utf-8');
     } catch (err) {
-        console.log('error while setting sidebar background: ' + (err as Error).message);
+        console.log('error while setting side bar background: ' + (err as Error).message);
     }
 }
 

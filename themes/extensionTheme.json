@@ -7,5 +7,118 @@
         "panel.background": "#000000",
         "statusBar.background": "#ffffff",
         "editorGroupHeader.tabsBackground": "#000000"
-    }
+    },
+    "tokenColors": [
+        {
+            "scope": "enum",
+            "settings": {
+                "foreground": "#ffffff"
+            }
+        },
+        {
+            "scope": "variable",
+            "settings": {
+                "foreground": "#cc07fd"
+            }
+        },
+        {
+            "scope": [
+                "variable.other.member",
+                "variable.other.object.property"
+            ],
+            "settings": {
+                "foreground": "#26fdf8"
+            }
+        },
+        {
+            "scope": "decorator",
+            "settings": {
+                "foreground": "#ffffff"
+            }
+        },
+        {
+            "scope": [
+                "function",
+                "entity.name.function"               
+            ],
+            "settings": {
+                "foreground": "#f6ee0d"
+            }
+        },
+        {
+            "scope": [
+                "comment",               
+                "punctuation.definition.comment"
+            ],
+            "settings": {
+                "foreground": "#4c4c4c"
+            }
+        },
+        {
+            "scope": "string",
+            "settings": {
+                "foreground": "#fd3307"
+            }
+        },
+        {
+            "scope": "keyword",
+            "settings": {
+                "foreground": "#d0f60d"
+            }
+        },
+        {
+            "scope": "number",
+            "settings": {
+                "foreground": "#ffffff"
+            }
+        },
+        {
+            "scope": "keyword.operator",
+            "settings": {
+                "foreground": "#3eccef"
+            }
+        },
+        {
+            "scope": "storage.type",
+            "settings": {
+                "foreground": "#0df6e3"
+            }
+        },
+        {
+            "scope": "entity.name.type.class",
+            "settings": {
+                "foreground": "#eaef3e"
+            }
+        },
+        {
+            "scope": "storage.modifier",
+            "settings": {
+                "foreground": "#6e3eef"
+            }
+        },
+        {
+            "scope": [
+                "constant.language",
+                "constant.numeric"
+            ],
+            "settings": {
+                "foreground": "#f85457"
+            }
+        },
+        {
+            "scope": [
+              "meta.method",
+              "meta.function-call"
+            ],
+            "settings": {
+                "foreground": "#fd9126"
+            }
+        },
+        {
+            "scope": "punctuation",
+            "settings": {
+                "foreground": "#d5fd26"
+            }
+        }
+    ]
 }

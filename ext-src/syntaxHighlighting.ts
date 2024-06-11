@@ -17,95 +17,122 @@ import * as vscode from 'vscode';
 // operators
 
 // interface TokenColor {
-//     scope: string,
+//     scope: string | string[],
 //     settings: { color: string }
 // };
 
-let syntaxScopes: { scope: string, settings: { foreground: string } }[] = [
-    {
-        scope: "class",
-        settings: {
-            foreground: "#ffffff"
-        }
-    },
-    {
-        scope: "interface",
-        settings: {
-            foreground: "#ffffff"
-        }
-    },
+let syntaxScopes: { scope: string | string[], settings: { foreground: string } }[] = [
     {
         scope: "enum",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#ffffff"
         }
-    },
-    {
-        scope: "typeParameter",
-        settings: {
-            foreground: "#ffffff"
-        }
-    },
-    {
+      },
+      {
         scope: "variable",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#cc07fd"
         }
-    },
-    {
-        scope: "property",
+      },
+      {
+        scope: [
+          "variable.other.member",
+          "variable.other.object.property"
+        ],
         settings: {
-            foreground: "#ffffff"
+          foreground: "#26fdf8"
         }
-    },
-    {
+      },
+      {
         scope: "decorator",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#ffffff"
         }
-    },
-    {
-        scope: "function",
+      },
+      {
+        scope: [
+          "function",
+          "entity.name.function"
+        ],
         settings: {
-            foreground: "#ffffff"
+          foreground: "#f6ee0d"
         }
-    },
-    {
-        scope: "method",
+      },
+      {
+        scope: [
+          "comment",
+          "punctuation.definition.comment"
+        ],
         settings: {
-            foreground: "#ffffff"
+          foreground: "#4c4c4c"
         }
-    },
-    {
-        scope: "comment",
-        settings: {
-            foreground: "#ffffff"
-        }
-    },
-    {
+      },
+      {
         scope: "string",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#fd3307"
         }
-    },
-    {
+      },
+      {
         scope: "keyword",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#d0f60d"
         }
-    },
-    {
+      },
+      {
         scope: "number",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#ffffff"
         }
-    },
-    {
-        scope: "operator",
+      },
+      {
+        scope: "keyword.operator",
         settings: {
-            foreground: "#ffffff"
+          foreground: "#3eccef"
         }
-    },
+      },
+      {
+        scope: "storage.type",
+        settings: {
+          foreground: "#0df6e3"
+        }
+      },
+      {
+        scope: "entity.name.type.class",
+        settings: {
+          foreground: "#eaef3e"
+        }
+      },
+      {
+        scope: "storage.modifier",
+        settings: {
+          foreground: "#6e3eef"
+        }
+      },
+      {
+        scope: [
+          "constant.language",
+          "constant.numeric"
+        ],
+        settings: {
+          foreground: "#f85457"
+        }
+      },
+      {
+        scope: [
+          "meta.method",
+          "meta.function-call"
+        ],
+        settings: {
+          foreground: "#fd9126"
+        }
+      },
+      {
+        scope: "punctuation",
+        settings: {
+          foreground: "#d5fd26"
+        }
+      }
 ];
 
 function changeCodeSyntaxColor(color: string, scopeIdx: number, context: vscode.ExtensionContext) {
