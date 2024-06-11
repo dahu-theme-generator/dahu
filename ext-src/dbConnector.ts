@@ -46,7 +46,7 @@ function savePreset(name: string, context: vscode.ExtensionContext) {
         const sql = `
             INSERT INTO presets (name, editorcolor, sidebarcolor, panelcolor, statusbarcolor, tabscolor, tokencolors) VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
-        db.run(sql, [editor, sidebar, panel, statusBar, tabs, tokenColors], (err) => {
+        db.run(sql, [name, editor, sidebar, panel, statusBar, tabs, tokenColors], (err) => {
             if(err) {
                 return console.log('error while inserting preset into db: ' + (err as Error).message);
             }
