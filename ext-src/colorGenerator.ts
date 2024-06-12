@@ -16,8 +16,10 @@ async function getColorPalleteFromImage(fileURI: vscode.Uri): Promise<string[]> 
     const filePath = fileURI.fsPath;
     try {
         const colorPalette = await ColorThief.getPalette(filePath, 5);
-        const hexPalette = colorPalette.map((rgb: any) => {
-            return '#' + rgb.map((component: any) => {rbgToHex(component);}).join('');
+        console.log('color palette: -------');
+        console.log(colorPalette);
+        const hexPalette = colorPalette.map((rgb: number[]) => {
+            return '#' + rgb.map((component: number) => {rbgToHex(component);}).join('');
         });
         return hexPalette;
     } catch(error) {

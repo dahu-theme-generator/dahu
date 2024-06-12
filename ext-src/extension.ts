@@ -152,12 +152,6 @@ class WebPanel {
 function enableTheme() {
 	const config = vscode.workspace.getConfiguration();
 	const currentTheme = config.get<string>("workbench.colorTheme");
-	// if (currentTheme !== "Dahu Theme") {
-	// 	config.update("workbench.colorTheme", 'Dahu Theme', vscode.ConfigurationTarget.Global);
-	// 	console.log("Dahu theme was enabled for the first time");
-	// } else {
-	// 	console.log("Dahu theme is already enabled");
-	// }
 	config.update("workbench.colorTheme", "Dahu Theme", vscode.ConfigurationTarget.Global);
 }
 
@@ -183,7 +177,6 @@ export function activate(context: vscode.ExtensionContext) {
 					console.error('error saving preset: ' + (error as Error).message);
 				} finally {
 					console.log('finally block executed');
-					// closeDB();
 				}
 			} else {
 				console.log('the name was null...');
@@ -227,26 +220,26 @@ export function activate(context: vscode.ExtensionContext) {
 			};
 			
 			const fileUri = await vscode.window.showOpenDialog(opts);
-			if (fileUri && fileUri[0]) {
-				const imagepath = fileUri[0].fsPath;
-				try {
-					const palette = await ColorThief.getPalette(imagepath, 5);
-					console.log('color palette: ');
-					console.log(palette);
-				} catch(error) {
-					console.log('error while generating palette from picture: ', (error as Error).message);
-				}
-			}
-			// let palette: string[] = [];
-			// if(fileUri && fileUri[0]) {
+			// if (fileUri && fileUri[0]) {
+			// 	const imagepath = fileUri[0].fsPath;
 			// 	try {
-			// 		palette = await getColorPalleteFromImage(fileUri[0]);
-			// 		console.log('success, color palette generated from image:');
-			// 		palette.forEach(color => console.log(color));
+			// 		const palette = await ColorThief.getPalette(imagepath, 5);
+			// 		console.log('color palette: ');
+			// 		console.log(palette);
 			// 	} catch(error) {
-			// 		console.log('ERROR OCCURED while generating color palette from image: ' + (error as Error).message);
+			// 		console.log('error while generating palette from picture: ', (error as Error).message);
 			// 	}
 			// }
+			let palette: string[] = [];
+			if(fileUri && fileUri[0]) {
+				try {
+					palette = await getColorPalleteFromImage(fileUri[0]);
+					console.log('success, color palette generated from image:');
+					palette.forEach(color => console.log(color));
+				} catch(error) {
+					console.log('ERROR OCCURED while generating color palette from image: ' + (error as Error).message);
+				}
+			}
 		})
 	);
 }
