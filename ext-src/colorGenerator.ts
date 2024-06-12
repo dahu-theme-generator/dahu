@@ -28,7 +28,7 @@ async function getColorPalleteFromImage(fileURI: vscode.Uri): Promise<string[]> 
 
 function rbgToHex(color: number): string {
     const hex = color.toString(16);
-    return hex.length == 1 ? '0' + hex: hex;
+    return hex.length === 1 ? '0' + hex: hex;
 }
 
 export { generatePalette, getColorPalleteFromImage};
