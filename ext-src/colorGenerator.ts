@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ColorThief from 'colorthief';
+const ColorThief = require('colorthief');
 import * as vscode from 'vscode';
 
 async function generatePalette(color: string): Promise<string[]> {
@@ -16,8 +16,8 @@ async function getColorPalleteFromImage(fileURI: vscode.Uri): Promise<string[]> 
     const filePath = fileURI.fsPath;
     try {
         const colorPalette = await ColorThief.getPalette(filePath, 5);
-        const hexPalette = colorPalette.map((rgb) => {
-            return '#' + rgb.map((component) => {rbgToHex(component);}).join('');
+        const hexPalette = colorPalette.map((rgb: any) => {
+            return '#' + rgb.map((component: any) => {rbgToHex(component);}).join('');
         });
         return hexPalette;
     } catch(error) {

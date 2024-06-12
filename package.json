@@ -34,6 +34,10 @@
       {
         "command": "dahu.generatePalette",
         "title": "Generate Palette"
+      },
+      {
+        "command": "dahu.generateFromImage",
+        "title": "Generate palette from image"
       }
     ],
     "themes": [

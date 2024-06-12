@@ -6,6 +6,8 @@ import { initDB, closeDB, savePreset, getPresets } from "./dbConnector";
 import { Preset } from "./dataObjects";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 
+const ColorThief = require('colorthief');
+
 /**
  * Manages webview panels
  */
@@ -214,6 +216,37 @@ export function activate(context: vscode.ExtensionContext) {
 					console.log('ERROR OCCURED: ' + (error as Error).message);
 				}
 			}
+		}),
+		vscode.commands.registerCommand("dahu.generateFromImage", async () => {
+			const opts: vscode.OpenDialogOptions = {
+				canSelectMany: false,
+				openLabel: 'select an image',
+				filters: {
+					'Images': ['png', 'jpg', 'jpeg']
+				}
+			};
+			
+			const fileUri = await vscode.window.showOpenDialog(opts);
+			if (fileUri && fileUri[0]) {
+				const imagepath = fileUri[0].fsPath;
+				try {
+					const palette = await ColorThief.getPalette(imagepath, 5);
+					console.log('color palette: ');
+					console.log(palette);
+				} catch(error) {
+					console.log('error while generating palette from picture: ', (error as Error).message);
+				}
+			}
+			// let palette: string[] = [];
+			// if(fileUri && fileUri[0]) {
+			// 	try {
+			// 		palette = await getColorPalleteFromImage(fileUri[0]);
+			// 		console.log('success, color palette generated from image:');
+			// 		palette.forEach(color => console.log(color));
+			// 	} catch(error) {
+			// 		console.log('ERROR OCCURED while generating color palette from image: ' + (error as Error).message);
+			// 	}
+			// }
 		})
 	);
 }
