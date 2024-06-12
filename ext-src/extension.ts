@@ -2,6 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
+import { initDB, closeDB, savePreset, getPresets } from "./dbConnector";
+import { Preset } from "./dataObjects";
+import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
+
 /**
  * Manages webview panels
  */
@@ -162,9 +166,54 @@ function enableTheme() {
 export function activate(context: vscode.ExtensionContext) {
 	console.log("dahu is working...");
 	enableTheme();
+	initDB(context);
 	context.subscriptions.push(
 		vscode.commands.registerCommand("dahu.start-webview", () => {
 			WebPanel.createOrShow(context.extensionPath);
+		}),
+		vscode.commands.registerCommand("dahu.savePreset", async () => {
+			const presetName = await vscode.window.showInputBox({prompt: 'enter ur preset name'});
+			if(presetName) {
+				try {
+					await savePreset(presetName, context);
+					console.log('preset saved successfully');
+				} catch(error) {
+					console.error('error saving preset: ' + (error as Error).message);
+				} finally {
+					console.log('finally block executed');
+					// closeDB();
+				}
+			} else {
+				console.log('the name was null...');
+			}
+		}),
+		vscode.commands.registerCommand("dahu.showPresets", async () => {
+			let presets: Preset[];
+			let names: string[] = [];
+			try {
+				presets = await getPresets();
+				console.log('presets:');
+				presets.forEach(p => console.log(p));
+			} catch(error) {
+				console.error('error while getting presets: ' + (error as Error).message);
+			}
+			const selected = await vscode.window.showQuickPick(names, {placeHolder: 'select a preset'});
+			if(selected) {
+				vscode.window.showInformationMessage('preset selected: ' + selected);
+			}
+		}),
+		vscode.commands.registerCommand("dahu.generatePalette", async () => {
+			const hextString = await vscode.window.showInputBox({prompt: 'enter hex string'});
+			let palette: string[] = [];
+			if(hextString) {
+				try {
+					palette = await generatePalette(hextString)
+					console.log('generated palette: ');
+					palette.forEach(color => console.log(color));
+				} catch(error) {
+					console.log('ERROR OCCURED: ' + (error as Error).message);
+				}
+			}
 		})
 	);
 }

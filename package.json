@@ -22,6 +22,18 @@
       {
         "command": "dahu.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "dahu.savePreset",
+        "title": "Save Preset"
+      },
+      {
+        "command": "dahu.showPresets",
+        "title": "Show Presets"
+      },
+      {
+        "command": "dahu.generatePalette",
+        "title": "Generate Palette"
       }
     ],
     "themes": [
