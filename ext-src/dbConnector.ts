@@ -2,6 +2,7 @@ import * as sqlite3 from 'sqlite3';
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import { Preset } from './dataObjects';
 
 sqlite3.verbose();
 
@@ -16,12 +17,12 @@ function initDB(): sqlite3.Database {
            CREATE TABLE IF NOT EXISTS presets (
                id INTEGER PRIMARY KEY,
                name TEXT NOT NULL,
-               editorcolor TEXT,
-               sidebarcolor TEXT,
-               panelcolor TEXT,
-               statusbarcolor TEXT,
-               tabscolor TEXT,
-               tokencolors TEXT
+               editorColor TEXT,
+               sidebarColor TEXT,
+               panelColor TEXT,
+               statusBarColor TEXT,
+               tabsColor TEXT,
+               tokenColors TEXT
            );
         `);
     return db;
@@ -46,14 +47,32 @@ function savePreset(name: string, context: vscode.ExtensionContext) {
         const sql = `
             INSERT INTO presets (name, editorcolor, sidebarcolor, panelcolor, statusbarcolor, tabscolor, tokencolors) VALUES (?, ?, ?, ?, ?, ?, ?);
         `;
-        db.run(sql, [name, editor, sidebar, panel, statusBar, tabs, tokenColors], (err) => {
-            if(err) {
-                return console.log('error while inserting preset into db: ' + (err as Error).message);
+        db.run(sql, [name, editor, sidebar, panel, statusBar, tabs, tokenColors], (error) => {
+            if (error) {
+                return console.log('error while inserting preset into db: ' + (error as Error).message);
             }
         });
 
-    } catch (err) {
-        console.log('failed to read theme data: ' + (err as Error).message);
+    } catch (error) {
+        console.log('failed to read theme data: ' + (error as Error).message);
+    }
+}
+
+async function getPresets(): Promise<Preset[]>{
+    try {
+        const sql = 'SELECT * FROM presets;';
+        return await new Promise((resolve, reject) => {
+            db.all(sql, (error, rows: Preset[]) => {
+                if(error) {
+                    reject(error);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    } catch(error) {
+        console.log('error while fetching presets from the db: ' + (error as Error).message);
+        return [];
     }
 }
 
@@ -61,5 +80,5 @@ function closeDB() {
     db.close();
 }
 
-export {initDB, closeDB};
+export {initDB, closeDB, savePreset, getPresets};
 
