@@ -65,7 +65,7 @@ function savePreset(name: string, context: vscode.ExtensionContext): Promise<voi
     });
 }
 
-async function getPresets(): Promise<Preset[]>{
+async function getPresets(): Promise<Preset[]> {
     try {
         const sql = 'SELECT * FROM presets;';
         return await new Promise((resolve, reject) => {
