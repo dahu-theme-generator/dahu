@@ -220,16 +220,6 @@ export function activate(context: vscode.ExtensionContext) {
 			};
 			
 			const fileUri = await vscode.window.showOpenDialog(opts);
-			// if (fileUri && fileUri[0]) {
-			// 	const imagepath = fileUri[0].fsPath;
-			// 	try {
-			// 		const palette = await ColorThief.getPalette(imagepath, 5);
-			// 		console.log('color palette: ');
-			// 		console.log(palette);
-			// 	} catch(error) {
-			// 		console.log('error while generating palette from picture: ', (error as Error).message);
-			// 	}
-			// }
 			let palette: string[] = [];
 			if(fileUri && fileUri[0]) {
 				try {
