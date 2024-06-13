@@ -17,6 +17,7 @@ Image:
 </p>
 <br />
 Visual Studio Code theme:
+<br />
 <p align="center">
   <img src="./images/dahu-demo-ss.png" width="800" title="Color theme">
 </p>
