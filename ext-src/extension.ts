@@ -6,7 +6,6 @@ import { initDB, closeDB, savePreset, getPresets } from "./dbConnector";
 import { Preset } from "./dataObjects";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 
-const ColorThief = require('colorthief');
 
 /**
  * Manages webview panels
@@ -188,7 +187,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let presets: Preset[];
 			let names: string[] = [];
 			try {
-				presets = await getPresets();
+				presets = await getPresets(context);
 				console.log('presets:');
 				presets.forEach(p => console.log(p));
 			} catch(error) {

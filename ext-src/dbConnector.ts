@@ -6,11 +6,11 @@ import { Preset } from './dataObjects';
 
 sqlite3.verbose();
 
-let db: sqlite3.Database;
+// let db: sqlite3.Database;
 
 function initDB(context: vscode.ExtensionContext): sqlite3.Database {
     const dbPath = path.join(context.extensionPath, 'ext-src', 'extension.db');
-    db = new sqlite3.Database(dbPath, (err) => {
+    const db = new sqlite3.Database(dbPath, (err) => {
         if(err) return console.log(err.message);
         console.log('connected to the database, path: ' + dbPath);
     });
@@ -47,10 +47,12 @@ function savePreset(name: string, context: vscode.ExtensionContext): Promise<voi
             const tabs = themeData.colors['editorGroupHeader.tabsBackground'];
             const tokenColors = JSON.stringify(themeData.tokenColors);
             
+            const db = initDB(context);
             const sql = `
                 INSERT INTO presets (name, editorcolor, sidebarcolor, panelcolor, statusbarcolor, tabscolor, tokencolors) VALUES (?, ?, ?, ?, ?, ?, ?);
             `;
             db.run(sql, [name, editor, sidebar, panel, statusBar, tabs, tokenColors], (error) => {
+                closeDB(db);
                 if (error) {
                     return console.log('error while inserting preset into db: ' + (error as Error).message);
                 } else {
@@ -65,11 +67,13 @@ function savePreset(name: string, context: vscode.ExtensionContext): Promise<voi
     });
 }
 
-async function getPresets(): Promise<Preset[]> {
+async function getPresets(context: vscode.ExtensionContext): Promise<Preset[]> {
     try {
+        const db = initDB(context);
         const sql = 'SELECT * FROM presets;';
         return await new Promise((resolve, reject) => {
             db.all(sql, (error, rows: Preset[]) => {
+                closeDB(db);
                 if(error) {
                     reject(error);
                 } else {
@@ -83,8 +87,14 @@ async function getPresets(): Promise<Preset[]> {
     }
 }
 
-function closeDB() {
-    db.close();
+function closeDB(db: sqlite3.Database) {
+    db.close((err) => {
+        if(err) {
+            console.log('error while closing database: ' + err.message);
+        } else {
+            console.log('database connection closed');
+        }
+    });
 }
 
 export {initDB, closeDB, savePreset, getPresets};
