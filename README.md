@@ -12,7 +12,7 @@ Dahu is advanced color theme extension for Visual Studio Code.
 The following image was used to generate the theme for Visual Studio Code.
 Image:
 <p align="center">
-  <img src="./images/dahu-test-img.jpeg" width="350" title="Sample image">
+  <img src="./images/dahu-test-img.jpeg" width="1000" title="Sample image">
 </p>
 
 ### Language support
