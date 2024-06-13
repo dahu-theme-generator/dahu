@@ -182,6 +182,8 @@ export function activate(context: vscode.ExtensionContext) {
 				console.log('the name was null...');
 			}
 		}),
+
+		// TODO: remove the following 3 commands, these are just for debugging purposes
 		vscode.commands.registerCommand("dahu.showPresets", async () => {
 			let presets: Preset[];
 			let names: string[] = [];
