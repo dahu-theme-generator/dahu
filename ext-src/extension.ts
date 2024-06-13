@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-import { initDB, closeDB, savePreset, getPresets } from "./dbConnector";
+import { savePreset, getPresets } from "./dbConnector";
 import { Preset } from "./dataObjects";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 
@@ -161,7 +161,6 @@ function enableTheme() {
 export function activate(context: vscode.ExtensionContext) {
 	console.log("dahu is working...");
 	enableTheme();
-	initDB(context);
 	context.subscriptions.push(
 		vscode.commands.registerCommand("dahu.start-webview", () => {
 			WebPanel.createOrShow(context.extensionPath);
@@ -183,6 +182,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}),
 
 		// TODO: remove the following 3 commands, these are just for debugging purposes
+		
 		vscode.commands.registerCommand("dahu.showPresets", async () => {
 			let presets: Preset[];
 			let names: string[] = [];
