@@ -13,9 +13,12 @@ Dahu is advanced color theme extension for Visual Studio Code.
 
 This extension currently offers code syntax highlighting support for these languages:
 - C
+- C#
+- Go
 - Java
 - Python
 - JavaScript, TypeScript
+- PHP
 
 For other languages, it might not highlight the code syntax fully -> look for future updates.
 
