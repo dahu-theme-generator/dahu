@@ -32,6 +32,10 @@ This extension currently offers code syntax highlighting support for these langu
 - Python
 - JavaScript, TypeScript
 - PHP
+- R
+- Ruby
+- Rust
+- Shell
 
 For other languages, it might not highlight the code syntax fully -> look for future updates.
 
