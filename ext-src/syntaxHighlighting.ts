@@ -22,130 +22,150 @@ import * as vscode from 'vscode';
 // };
 
 let syntaxScopes: { scope: string | string[], settings: { foreground: string } }[] = [
-    {
-        scope: "enum",
-        settings: {
-          foreground: "#ffffff"
-        }
-      },
-      {
-        scope: "variable",
-        settings: {
-          foreground: "#cc07fd"
-        }
-      },
-      {
-        scope: [
-          "variable.other.member",
-          "variable.other.object.property"
-        ],
-        settings: {
-          foreground: "#26fdf8"
-        }
-      },
-      {
-        scope: "decorator",
-        settings: {
-          foreground: "#ffffff"
-        }
-      },
-      {
-        scope: [
-          "function",
-          "entity.name.function"
-        ],
-        settings: {
-          foreground: "#f6ee0d"
-        }
-      },
-      {
-        scope: [
-          "comment",
-          "punctuation.definition.comment"
-        ],
-        settings: {
-          foreground: "#4c4c4c"
-        }
-      },
-      {
-        scope: "string",
-        settings: {
-          foreground: "#fd3307"
-        }
-      },
-      {
-        scope: "keyword",
-        settings: {
-          foreground: "#d0f60d"
-        }
-      },
-      {
-        scope: "number",
-        settings: {
-          foreground: "#ffffff"
-        }
-      },
-      {
-        scope: "keyword.operator",
-        settings: {
-          foreground: "#3eccef"
-        }
-      },
-      {
-        scope: "storage.type",
-        settings: {
-          foreground: "#0df6e3"
-        }
-      },
-      {
-        scope: "entity.name.type.class",
-        settings: {
-          foreground: "#eaef3e"
-        }
-      },
-      {
-        scope: "storage.modifier",
-        settings: {
-          foreground: "#6e3eef"
-        }
-      },
-      {
-        scope: [
-          "constant.language",
-          "constant.numeric"
-        ],
-        settings: {
-          foreground: "#f85457"
-        }
-      },
-      {
-        scope: [
-          "meta.method",
-          "meta.function-call"
-        ],
-        settings: {
-          foreground: "#fd9126"
-        }
-      },
-      {
-        scope: "punctuation",
-        settings: {
-          foreground: "#d5fd26"
-        }
-      }
+	{
+		scope: "enum",
+		settings: {
+			foreground: "#ffffff"
+		}
+	},
+	{
+		scope: [
+			"storage.type",
+			"keyword.type"
+		],
+		settings: {
+			foreground: "#cc07fd"
+		}
+	},
+	{
+		scope: [
+			"variable.object",
+			"entity.name.variable",
+			"variable.other"
+		],
+		settings: {
+			foreground: "#26fdf8"
+		}
+	},
+	{
+		scope: [
+			"entity.name.type.class"
+		],
+		settings: {
+			foreground: "#ffffff"
+		}
+	},
+	{
+		scope: [
+			"entity.name.function",
+			"storage.type.function"
+		],
+		settings: {
+			foreground: "#f6ee0d"
+		}
+	},
+	{
+		scope: [
+			"comment",
+			"punctuation.definition.comment"
+		],
+		settings: {
+			foreground: "#4c4c4c"
+		}
+	},
+	{
+		scope: "string",
+		settings: {
+			foreground: "#fd3307"
+		}
+	},
+	{
+		scope: "keyword",
+		settings: {
+			foreground: "#d0f60d"
+		}
+	},
+	{
+		scope: "number",
+		settings: {
+			foreground: "#ffffff"
+		}
+	},
+	{
+		scope: "keyword.operator",
+		settings: {
+			foreground: "#3eccef"
+		}
+	},
+	{
+		scope: [
+			"entity.name.type.class",
+			"entity.name.type",
+			"support.class",
+			"storage."
+		],
+		settings: {
+			foreground: "#4aab43"
+		}
+	},
+	{
+		scope: [
+			"storage.modifier",
+			"variable.language.this",
+			"variable.language.self",
+			"variable.language.special.self"
+		],
+		settings: {
+			foreground: "#6e3eef"
+		}
+	},
+	{
+		scope: [
+			"constant.language",
+			"constant.numeric"
+		],
+		settings: {
+			foreground: "#f85457"
+		}
+	},
+	{
+		scope: [
+			"meta.method",
+			"meta.function-call",
+			"support.function"
+		],
+		settings: {
+			foreground: "#fd9126"
+		}
+	},
+	{
+		scope: [
+			"variable.parameter",
+			"entity.name.variable.parameter"
+		],
+		settings: {
+			foreground: "#936b9d"
+		}
+	},
+	{
+		scope: "punctuation",
+		settings: {
+			foreground: "#d5fd26"
+		}
+	}
 ];
 
 function changeCodeSyntaxColor(color: string, scopeIdx: number, context: vscode.ExtensionContext) {
-    const themePath = path.join(context.extensionPath, 'themes', 'extensionTheme.json');
-    try {
-        const themeData = JSON.parse(fs.readFileSync(themePath, 'utf8'));
-        syntaxScopes[scopeIdx].settings.foreground = color;
-        const scopesInJson: string[] = syntaxScopes.map(syntaxScope => JSON.stringify(syntaxScope));
-        themeData.tokenColors = scopesInJson;
-        fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2), 'utf-8');
-    } catch(err) {
-        console.log('error occured while changing class syntax colors: ' + (err as Error).message);
-    }
+	const themePath = path.join(context.extensionPath, 'themes', 'extensionTheme.json');
+	try {
+		const themeData = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+		syntaxScopes[scopeIdx].settings.foreground = color;
+		const scopesInJson: string[] = syntaxScopes.map(syntaxScope => JSON.stringify(syntaxScope));
+		themeData.tokenColors = scopesInJson;
+		fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2), 'utf-8');
+	} catch (err) {
+		console.log('error occured while changing class syntax colors: ' + (err as Error).message);
+	}
 }
 
 // function changeEnum(color: string, context: vscode.ExtensionContext) {
@@ -188,4 +208,4 @@ function changeCodeSyntaxColor(color: string, scopeIdx: number, context: vscode.
 // }
 
 
-export {syntaxScopes, changeCodeSyntaxColor};
+export { syntaxScopes, changeCodeSyntaxColor };

@@ -16,30 +16,36 @@
             }
         },
         {
-            "scope": "variable",
+            "scope": [
+                "storage.type",
+                "keyword.type"
+            ],
             "settings": {
                 "foreground": "#cc07fd"
             }
         },
         {
             "scope": [
-                "variable.other.member",
-                "variable.other.object.property"
+                "variable.object",
+                "entity.name.variable",
+                "variable.other"
             ],
             "settings": {
                 "foreground": "#26fdf8"
             }
         },
         {
-            "scope": "decorator",
+            "scope": [
+                "entity.name.type.class"
+            ],
             "settings": {
                 "foreground": "#ffffff"
             }
         },
         {
             "scope": [
-                "function",
-                "entity.name.function"               
+                "entity.name.function",
+                "storage.type.function"
             ],
             "settings": {
                 "foreground": "#f6ee0d"
@@ -79,19 +85,24 @@
             }
         },
         {
-            "scope": "storage.type",
+            "scope": [
+                "entity.name.type.class",
+                "entity.name.type",
+                "support.class",
+                "storage."
+            ],
             "settings": {
-                "foreground": "#0df6e3"
+                "foreground": "#4aab43"
             }
         },
         {
-            "scope": "entity.name.type.class",
-            "settings": {
-                "foreground": "#eaef3e"
-            }
-        },
-        {
-            "scope": "storage.modifier",
+            "scope": [
+                "storage.modifier",
+                "variable.language.this",
+                "variable.language.self",
+                "variable.language.special.self"
+
+            ],
             "settings": {
                 "foreground": "#6e3eef"
             }
@@ -108,10 +119,20 @@
         {
             "scope": [
               "meta.method",
-              "meta.function-call"
+              "meta.function-call",
+              "support.function"
             ],
             "settings": {
                 "foreground": "#fd9126"
+            }
+        },
+        {
+            "scope": [
+                "variable.parameter",
+                "entity.name.variable.parameter"
+            ],
+            "settings": {
+                "foreground": "#936b9d"
             }
         },
         {
