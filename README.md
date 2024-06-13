@@ -9,6 +9,10 @@ Dahu is advanced color theme extension for Visual Studio Code.
 - Saving the current color combination to a preset and naming it whatever you like.
 - Choosing a preset from saved ones and applying it.
 
+The following image was used to generate the theme for Visual Studio Code.
+Image:
+![sample image](https://github.com/mariusuktveris/dahu/blob/main/dahu-test-img.jpeg?raw=true)
+
 ### Language support
 
 This extension currently offers code syntax highlighting support for these languages:
@@ -21,8 +25,6 @@ This extension currently offers code syntax highlighting support for these langu
 - PHP
 
 For other languages, it might not highlight the code syntax fully -> look for future updates.
-
-### TODO: Put screenshots of extension features
 
 ## Requirements
 
