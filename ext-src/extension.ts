@@ -204,7 +204,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let palette: string[] = [];
 			if(hextString) {
 				try {
-					palette = await generatePalette(hextString)
+					palette = await generatePalette(hextString);
 					console.log('generated palette: ');
 					palette.forEach(color => console.log(color));
 				} catch(error) {
