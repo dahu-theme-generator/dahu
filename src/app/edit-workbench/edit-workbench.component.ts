@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-workbench',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './edit-workbench.component.html',
-  styleUrl: './edit-workbench.component.css'
+  styleUrls:[ './edit-workbench.component.css']
 })
 export class EditWorkbenchComponent {
   colors = [

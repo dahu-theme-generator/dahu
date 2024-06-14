@@ -1,6 +1,7 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 let EditWorkbenchComponent = class EditWorkbenchComponent {
     constructor() {
         this.colors = [
@@ -25,9 +26,9 @@ EditWorkbenchComponent = __decorate([
     Component({
         selector: 'app-edit-workbench',
         standalone: true,
-        imports: [FormsModule],
+        imports: [FormsModule, CommonModule],
         templateUrl: './edit-workbench.component.html',
-        styleUrl: './edit-workbench.component.css'
+        styleUrls: ['./edit-workbench.component.css']
     })
 ], EditWorkbenchComponent);
 export { EditWorkbenchComponent };

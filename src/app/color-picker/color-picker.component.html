@@ -3,4 +3,7 @@
     <input type="text" placeholder="HEX color" [(ngModel)]="selectedColor" (input)="onInputChange()" />
   </div>
    -->
-   <div id="defaultPicker" class="color-picker-container"></div>
+   <div class="color-wheel-container">
+    <canvas #colorWheelCanvas width="300" height="300"></canvas>
+  </div>
+  

@@ -1,16 +1,28 @@
-
-   
-    <div class="color-scheme-container">
-        <h2>Generate Theme</h2>
-
-        <div class="color-blocks">
-            <div class="color-block">
-                <app-color-picker></app-color-picker>
-            </div>
-            <p>Or</p>
-            <div class="color-block">
-            <button mat-raised-button>Generate Random</button>
-            </div>
+<div class="color-scheme-container">
+    <h2>Generate Theme</h2>
+  
+    <div class="color-blocks">
+      <div class="color-block">
+        <app-color-picker (colorSelected)="onColorSelected($event)"></app-color-picker>
+        <div class="joined">
+          <div class="color-box-input">
+            <div class="color-box" [style.backgroundColor]="selectedColor"></div>
+            <input
+              type="text"
+              [value]="selectedColor"
+              (input)="updateColor($event.target.value)"
+            />
+          </div>
+          <div class="generate-btn-container">
+            <button class="generate-btn">Generate</button>
+          </div>
         </div>
+        <!-- <p>Selected Color: {{ selectedColor }}</p> -->
+      </div>
+      <p>Or</p>
+      <div class="color-block">
+        <button mat-raised-button>Generate Random</button>
+      </div>
     </div>
-
+  </div>
+  

@@ -1,5 +1,5 @@
 import { __decorate } from "tslib";
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { LibraryComponent } from './library/library.component';
 import { EditSyntaxComponent } from './edit-syntax/edit-syntax.component';
 import { GenerateColorSchemeComponent } from './generate-color-scheme/generate-color-scheme.component';
@@ -10,36 +10,43 @@ import { FormsModule } from '@angular/forms';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 let AppComponent = class AppComponent {
-    constructor() {
-        this.title = 'dahu';
-        this.vscode = acquireVsCodeApi();
-        window.addEventListener('message', (event) => {
-            if (event.data.command === 'update-title') {
-                this.title = event.data.payload.title;
-            }
-        });
+    ngAfterViewInit() {
+        // Log libraryComponent to ensure it's available
+        console.log('ngAfterViewInit:', this.libraryComponent);
     }
-    postToExtension(text) {
-        this.vscode.postMessage({
-            command: 'notification',
-            data: {
-                text,
-            },
-        });
+    scrollToLibrary() {
+        if (this.libraryComponent && this.libraryComponent.nativeElement) {
+            this.libraryComponent.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        else {
+            console.error('LibraryComponent is not available.', this.libraryComponent);
+        }
     }
 };
+__decorate([
+    ViewChild('libraryComponent', { static: false })
+], AppComponent.prototype, "libraryComponent", void 0);
 AppComponent = __decorate([
     Component({
         selector: 'app-root',
         templateUrl: './app.component.html',
-        imports: [ReactiveFormsModule, ColorSketchModule, FormsModule, ColorPickerComponent, ColorPickerModule,
+        imports: [
+            CommonModule,
+            ReactiveFormsModule,
+            ColorSketchModule,
+            FormsModule,
+            ColorPickerComponent,
+            ColorPickerModule,
             LibraryComponent,
             EditSyntaxComponent,
-            GenerateColorSchemeComponent, EditWorkbenchComponent, UploadFromPictureComponent
+            GenerateColorSchemeComponent,
+            EditWorkbenchComponent,
+            UploadFromPictureComponent
         ],
         standalone: true,
-        styleUrl: './app.component.css'
+        styleUrls: ['./app.component.css'] // use `styleUrls` instead of `styleUrl`
     })
 ], AppComponent);
 export { AppComponent };

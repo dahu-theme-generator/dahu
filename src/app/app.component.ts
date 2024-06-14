@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { LibraryComponent } from './library/library.component';
 import { EditSyntaxComponent } from './edit-syntax/edit-syntax.component';
 import { GenerateColorSchemeComponent } from './generate-color-scheme/generate-color-scheme.component';
@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ColorPickerComponent } from './color-picker/color-picker.component'; 
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 declare function acquireVsCodeApi(): {
   postMessage(options: { command: string; data: unknown }): void;
@@ -17,37 +18,38 @@ declare function acquireVsCodeApi(): {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [ ReactiveFormsModule, ColorSketchModule, FormsModule, ColorPickerComponent, ColorPickerModule,
-      LibraryComponent, 
-      EditSyntaxComponent, 
-      GenerateColorSchemeComponent, EditWorkbenchComponent, UploadFromPictureComponent
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ColorSketchModule,
+    FormsModule,
+    ColorPickerComponent,
+    ColorPickerModule,
+    LibraryComponent,
+    EditSyntaxComponent,
+    GenerateColorSchemeComponent,
+    EditWorkbenchComponent,
+    UploadFromPictureComponent
   ],
   standalone: true,
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // use `styleUrls` instead of `styleUrl`
 })
-export class AppComponent {
-  title = 'dahu';
-  vscode = acquireVsCodeApi();
+export class AppComponent implements AfterViewInit {
+  // title = 'dahu';
+  // vscode = acquireVsCodeApi();
 
-  constructor() {
-    window.addEventListener(
-      'message',
-      (
-        event: MessageEvent<{ command: string; payload: { title: string } }>,
-      ) => {
-        if (event.data.command === 'update-title') {
-          this.title = event.data.payload.title;
-        }
-      },
-    );
+  @ViewChild('libraryComponent', { static: false }) libraryComponent!: ElementRef;
+
+  ngAfterViewInit(): void {
+    // Log libraryComponent to ensure it's available
+    console.log('ngAfterViewInit:', this.libraryComponent);
   }
 
-  postToExtension(text: string) {
-    this.vscode.postMessage({
-      command: 'notification',
-      data: {
-        text,
-      },
-    });
+  scrollToLibrary(): void {
+    if (this.libraryComponent && this.libraryComponent.nativeElement) {
+      this.libraryComponent.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.error('LibraryComponent is not available.', this.libraryComponent);
+    }
   }
 }

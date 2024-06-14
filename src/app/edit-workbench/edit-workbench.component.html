@@ -1,16 +1,18 @@
-<h2>Edit Workbench<h2>
-      
-    <div *ngFor="let color of colors; let i = index">
-        <div>
-          <h3>{{ color.name }}</h3>
-          <div class="color-box" [style.backgroundColor]="color.hex"></div>
-          <input
-            type="text"
-            [value]="color.hex"
-            (input)="updateColor($event.target.value, i)"
-          />
-        </div>
+<div class="general">
+    <h2>Edit Workbench</h2>
+  
+    <div class="color-boxes">
+      <div *ngFor="let color of colors; let i = index" class="color-item">
+        <h3>{{ color.name }}</h3>
+        <div class="color-box" [style.backgroundColor]="color.hex"></div>
+        <input
+          type="text"
+          [value]="color.hex"
+          (input)="updateColor($event.target.value, i)"
+        />
       </div>
-      
-      <button (click)="saveColors()">Save</button>
-      
+    </div>
+  
+    <button (click)="saveColors()">Save</button>
+  </div>
+  

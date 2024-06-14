@@ -1,14 +1,21 @@
 button {
-  background: rgb(108, 108, 255);
   color: white;
   padding: 5px 20px;
   border-radius: 4px;
   border: none;
 }
-button{
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50%;
   border: none;
-  background-color: transparent;
-  border: none;
+  cursor: pointer;
 }
 
 header {
@@ -20,6 +27,7 @@ header {
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 @import url('https://fonts.cdnfonts.com/css/inknut-antiqua');
 
 h1 {
@@ -32,13 +40,11 @@ h1 {
 
 main {
   margin-top: 100px; /* Adjusted for header height */
-  /* background-color: grey; */
 }
 
 .scroll-container {
   height: 100vh; /* Full viewport height */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  scroll-snap-type: y mandatory; /* Ensure sections snap into place */
+  overflow-y: auto; /* Enable vertical scrolling */
   scroll-behavior: smooth; /* Smooth scrolling */
 }
 

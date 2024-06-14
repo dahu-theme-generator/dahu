@@ -3,11 +3,13 @@
 </header>
 <main>
   <div class="scroll-container">
-    <!-- <app-color-picker></app-color-picker> -->
-    <app-library></app-library>
+    <app-library #libraryComponent></app-library>
     <app-generate-color-scheme></app-generate-color-scheme>
-    <app-edit-workbench></app-edit-workbench>
+    <app-edit-workbench id="editWorkbenchId"></app-edit-workbench>
     <app-edit-syntax></app-edit-syntax>
     <app-upload-from-picture></app-upload-from-picture>
   </div>
 </main>
+<!-- <footer>
+  <button class="back-to-top" (click)="scrollToLibrary()">&#94;</button>
+</footer> -->

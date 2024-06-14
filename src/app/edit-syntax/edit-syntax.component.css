@@ -1,0 +1,65 @@
+
+  h2{
+    align-self: center;
+  }
+
+  button {
+    align-self: flex-end;
+    background-color: grey;
+    border: none;
+    border-radius: 2px;
+  }
+
+  .general {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items vertically within each color-item */
+    text-align: center; /* Center text horizontally within each color-item */
+  }
+  
+  .color-box {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    border: 2px solid grey;
+    border-radius: 2px;
+  }
+  
+  input[type="text"] {
+    border: 2px solid grey;
+    border-radius: 1px;
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .color-boxes {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to a new line if space is limited */
+    gap: 10px; /* Adds space between items */
+  }
+  
+  .pagination-buttons {
+    height: 100%;
+    display: flex;
+    align-items: center; /* Center vertically */
+  }
+  
+  .pagination-buttons button {
+    height: 100%;
+    align-content: center;
+    background-color: grey;
+    border: none;
+    width: 30px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    font-size: larger; /* Adjust font size */
+    font-weight: bold;
+  }
+  
+  

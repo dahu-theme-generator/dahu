@@ -1,0 +1,15 @@
+.image-upload {
+    text-align: center;
+  }
+  
+  input[type="file"] {
+    margin-top: 20px;
+  }
+  
+  img {
+    max-width: 300px;
+    max-height: 300px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+  }
+  
