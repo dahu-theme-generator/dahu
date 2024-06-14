@@ -2,11 +2,12 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-import { savePreset, getPresets } from "./dbConnector";
+import { savePreset, getPresets, getPreset} from "./dbConnector";
 import { Preset } from "./dataObjects";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
+import { applyPreset } from "./backgroundHighlighting";
 
-
+let globalExtensionPath: string;
 /**
  * Manages webview panels
  */
@@ -84,7 +85,6 @@ class WebPanel {
 				],
 			}
 		);
-
 		// Set the webview's initial html content
 		this.panel.webview.html = this._getHtmlForWebview();
 
@@ -105,6 +105,37 @@ class WebPanel {
 			null,
 			this.disposables
 		);
+		
+		this.panel.webview.onDidReceiveMessage(
+            async (message) => {
+                switch (message.command) {
+                    case 'getPresets':
+                        const presets = await getPresets(extensionPath);
+                        this.panel.webview.postMessage({ command: 'presets', data: presets });
+                        break;
+                    case 'savePreset':
+                        try {
+                            await savePreset(message.data.name, extensionPath);
+                            vscode.window.showInformationMessage('Preset saved successfully');
+                        } catch (error) {
+                            vscode.window.showErrorMessage('Error saving preset: ' + (error as Error).message);
+                        }
+                        break;
+					case 'applyPreset':
+						console.log('apply preset called');
+						await getPreset(message.data.theme, extensionPath)
+							.then(preset=> {
+								applyPreset(preset);
+								vscode.window.showInformationMessage('preset applied: ' + preset.name);
+							})
+							.catch(error => {
+								console.log('error while applyin preset: ' + (error as Error).message);
+							});
+                }
+            },
+            null,
+            this.disposables
+        );
 	}
 
 	public dispose() {
@@ -159,7 +190,8 @@ function enableTheme() {
  * @param context vscode extension context
  */
 export function activate(context: vscode.ExtensionContext) {
-	console.log("dahu is working...");
+	globalExtensionPath = context.extensionPath;
+	// console.log("dahu is working...");
 	enableTheme();
 	context.subscriptions.push(
 		vscode.commands.registerCommand("dahu.start-webview", () => {
@@ -169,7 +201,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const presetName = await vscode.window.showInputBox({prompt: 'enter ur preset name'});
 			if(presetName) {
 				try {
-					await savePreset(presetName, context);
+					await savePreset(presetName, context.extensionPath);
 					console.log('preset saved successfully');
 				} catch(error) {
 					console.error('error saving preset: ' + (error as Error).message);
@@ -187,7 +219,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let presets: Preset[];
 			let names: string[] = [];
 			try {
-				presets = await getPresets(context);
+				presets = await getPresets(context.extensionPath);
 				console.log('presets:');
 				presets.forEach(p => console.log(p));
 			} catch(error) {
@@ -234,3 +266,5 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 }
+
+export {globalExtensionPath};

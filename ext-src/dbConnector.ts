@@ -1,5 +1,4 @@
 import * as sqlite3 from 'sqlite3';
-import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Preset } from './dataObjects';
@@ -8,8 +7,8 @@ sqlite3.verbose();
 
 // let db: sqlite3.Database;
 
-function initDB(context: vscode.ExtensionContext): sqlite3.Database {
-    const dbPath = path.join(context.extensionPath, 'ext-src', 'extension.db');
+function initDB(extensionPath: string): sqlite3.Database {
+    const dbPath = path.join(extensionPath, 'ext-src', 'extension.db');
     const db = new sqlite3.Database(dbPath, (err) => {
         if(err) return console.log(err.message);
         console.log('connected to the database, path: ' + dbPath);
@@ -29,10 +28,10 @@ function initDB(context: vscode.ExtensionContext): sqlite3.Database {
     return db;
 }
 
-function savePreset(name: string, context: vscode.ExtensionContext): Promise<void> {
+function savePreset(name: string, extensionPath: string): Promise<void> {
     return new Promise((resolve, reject) => {
 
-        const themePath = path.join(context.extensionPath, 'themes', 'extensionTheme.json');
+        const themePath = path.join(extensionPath, 'themes', 'extensionTheme.json');
         if(!name) {
             console.log('name cannot be empty while saving');
             return;
@@ -47,7 +46,7 @@ function savePreset(name: string, context: vscode.ExtensionContext): Promise<voi
             const tabs = themeData.colors['editorGroupHeader.tabsBackground'];
             const tokenColors = JSON.stringify(themeData.tokenColors);
             
-            const db = initDB(context);
+            const db = initDB(extensionPath);
             const sql = `
                 INSERT INTO presets (name, editorcolor, sidebarcolor, panelcolor, statusbarcolor, tabscolor, tokencolors) VALUES (?, ?, ?, ?, ?, ?, ?);
             `;
@@ -67,9 +66,28 @@ function savePreset(name: string, context: vscode.ExtensionContext): Promise<voi
     });
 }
 
-async function getPresets(context: vscode.ExtensionContext): Promise<Preset[]> {
+async function getPreset(name: string, extensionPath: string): Promise<Preset> {
     try {
-        const db = initDB(context);
+        const db = initDB(extensionPath);
+        const sql = 'SELECT * FROM presets WHERE name = ?';
+        return await new Promise((resolve, reject) => {
+            db.get(sql, [name], (error, row: Preset) => {
+                if(error) {
+                    reject(error);
+                } else {
+                    resolve(row);
+                }
+            })
+        })
+    } catch(error) {
+        console.log('error while fetching preset with name ' + name + 'from db: ' + (error as Error).message);
+        throw error;
+    }
+}
+
+async function getPresets(extensionPath: string): Promise<Preset[]> {
+    try {
+        const db = initDB(extensionPath);
         const sql = 'SELECT * FROM presets;';
         return await new Promise((resolve, reject) => {
             db.all(sql, (error, rows: Preset[]) => {
@@ -97,5 +115,5 @@ function closeDB(db: sqlite3.Database) {
     });
 }
 
-export {initDB, closeDB, savePreset, getPresets};
+export {initDB, closeDB, savePreset, getPresets, getPreset};
 

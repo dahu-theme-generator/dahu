@@ -155,8 +155,8 @@ let syntaxScopes: { scope: string | string[], settings: { foreground: string } }
 	}
 ];
 
-function changeCodeSyntaxColor(color: string, scopeIdx: number, context: vscode.ExtensionContext) {
-	const themePath = path.join(context.extensionPath, 'themes', 'extensionTheme.json');
+function changeCodeSyntaxColor(color: string, scopeIdx: number, extensionPath: string) {
+	const themePath = path.join(extensionPath, 'themes', 'extensionTheme.json');
 	try {
 		const themeData = JSON.parse(fs.readFileSync(themePath, 'utf8'));
 		syntaxScopes[scopeIdx].settings.foreground = color;

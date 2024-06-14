@@ -2,6 +2,9 @@ import { initDB, closeDB } from "./dbConnector";
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { Preset } from "./dataObjects";
+
+import { globalExtensionPath } from "./extension";
 
 // let db = initDB();
 
@@ -13,9 +16,27 @@ import * as vscode from 'vscode';
 // tabs background
 // ...
 
+
+function applyPreset(preset: Preset) {
+    const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
+    try {
+        const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+        themeData.colors['editor.background'] = preset.editorColor;
+        themeData.colors['sideBar.background'] = preset.sidebarColor;
+        themeData.colors['panel.background'] = preset.panelColor;
+        themeData.colors['statusBar.background'] = preset.statusBarColor;
+        themeData.colors['editorGroupHeader.tabsBackground'] = preset.tabsColor;
+        let syntaxScopes: { scope: string | string[], settings: { foreground: string } }[] = JSON.parse(preset.tokenColors);
+        const scopesInJSON: string[] = syntaxScopes.map(scope => JSON.stringify(scope));
+        themeData.tokenColors = scopesInJSON;
+    } catch(error) {
+        console.log('error while applying preset: ' + (error as Error).message);
+    }
+}
+
 function changeEditor(color: string, context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration();
-    const currentTheme = config.get<string>('workbench.colorTheme');
+    // const currentTheme = config.get<string>('workbench.colorTheme');
     const themePath = path.join(context.extensionPath, 'themes', 'extensiontheme.json');
 
     try {
@@ -71,4 +92,4 @@ function changeTabs(color: string, context: vscode.ExtensionContext) {
     }
 }
 
-export { changeEditor, changeSidebar, changePanel, changeStatusBar, changeTabs};
+export { changeEditor, changeSidebar, changePanel, changeStatusBar, changeTabs, applyPreset};

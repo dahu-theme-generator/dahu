@@ -4,7 +4,7 @@
       <div *ngFor="let theme of themes" class="theme-block">
        <div> {{ theme }}</div>
         <div class="theme-buttons">
-            <button class="theme-button">Apply</button>
+            <button class="theme-button" (click)="applyTheme(theme)">Apply</button>
             <button class="theme-button" (click)="scrollToEditWorkbench()">Edit</button>
         </div>
       </div>
