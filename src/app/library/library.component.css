@@ -1,0 +1,46 @@
+.library-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  text-align: center; /* Center text */
+}
+
+.theme-blocks {
+  display: flex;
+  flex-direction: column; /* Stack blocks vertically */
+  align-items: center; /* Center horizontally */
+  margin-top: 20px; /* Add space below header */
+}
+.theme-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-block {
+  display: grid;
+  grid-template-columns: 1fr, 1fr, 1fr;
+  background-color: rgba(255, 255, 255, 0.1); /* Example background for theme blocks */
+  margin: 10px 0;
+  padding: 10px 20px;
+  border: 2px;
+  border-color: black;
+  height: 60px;
+  width: 360px;
+  align-items: center;
+  border-radius: 8px;
+}
+button{
+  border: none;
+  background-color: transparent;
+  border: none;
+}
+
+.no-themes {
+  margin-top: 20px; /* Add space below header */
+  font-size: 16px; /* Adjust as needed */
+  color: aliceblue;
+}

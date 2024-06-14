@@ -1,12 +1,51 @@
 button {
-    background: rgb(108, 108, 255);
-    color: white;
-    padding: 5px 20px;
-    border-radius: 4px;
-    border: none;
-  }
+  background: rgb(108, 108, 255);
+  color: white;
+  padding: 5px 20px;
+  border-radius: 4px;
+  border: none;
+}
+button{
+  border: none;
+  background-color: transparent;
+  border: none;
+}
 
-h1{
-    color:cadetblue;
-    padding-left: 60px;
+header {
+  background-color: var(--background-color);
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+@import url('https://fonts.cdnfonts.com/css/inknut-antiqua');
+
+h1 {
+  margin-left: 30px;
+  color: var(--foreground-color);
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Inknut Antiqua', sans-serif;
+}
+
+main {
+  margin-top: 100px; /* Adjusted for header height */
+  /* background-color: grey; */
+}
+
+.scroll-container {
+  height: 100vh; /* Full viewport height */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  scroll-snap-type: y mandatory; /* Ensure sections snap into place */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.scroll-container > * {
+  height: 100vh; /* Each section takes full viewport height */
+  display: flex; /* Use Flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  scroll-snap-align: start; /* Snap each section to the start of the viewport */
 }
