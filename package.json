@@ -3,6 +3,7 @@
   "displayName": "dahu",
   "description": "advanced vscode colorscheme manager",
   "version": "0.0.1",
+  "publisher": "Dahu",
   "repository": {
     "type": "git",
     "url": "https://github.com/mariusuktveris/dahu"
