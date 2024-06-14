@@ -8,7 +8,7 @@ CreateThemeComponent = __decorate([
         standalone: true,
         imports: [],
         templateUrl: './create-theme.component.html',
-        styleUrl: './create-theme.component.scss'
+        styleUrl: './create-theme.component.css'
     })
 ], CreateThemeComponent);
 export { CreateThemeComponent };

@@ -1,1 +1,17 @@
-<p>library works!</p>
+<div class="library-container">
+    <h2>Library</h2>
+    <div *ngIf="themes.length > 0; else noThemes" class="theme-blocks">
+      <div *ngFor="let theme of themes" class="theme-block">
+       <div> {{ theme }}</div>
+        <div class="theme-buttons">
+            <button class="theme-button">Apply</button>
+            <button class="theme-button" (click)="scrollToEditWorkbench()">Edit</button>
+        </div>
+      </div>
+      
+    </div>
+    <ng-template #noThemes>
+      <p class="no-themes">No themes yet :(</p>
+    </ng-template>
+  </div>
+  

@@ -1,24 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  <h1>dahu</h1>
+</header>
 <main>
-  <header>
-    <h1> Hello and welcome to dahu</h1>
-  </header>
-  <section class="content">
-    <app-side-bar></app-side-bar>
-  </section>
+  <div class="scroll-container">
+    <app-library #libraryComponent></app-library>
+    <app-generate-color-scheme></app-generate-color-scheme>
+    <app-edit-workbench id="editWorkbenchId"></app-edit-workbench>
+    <app-edit-syntax></app-edit-syntax>
+    <app-upload-from-picture></app-upload-from-picture>
+  </div>
 </main>
-
-
-
-
-
-<!-- <h2>Send message from Webview to Extension</h2>
-<textarea #text>Hello world notification!</textarea><br />
-<button (click)="postToExtension(text.value)">Send message to extension</button>
-<p>Should produce a notification from the extension process.</p>
-
-<h2>Send message from Extension to Webview</h2>
-<p>
-  Open Command Palette (Cmd+Shift) and select "Angular: Update title" to update
-  the title in Webview from the extension process.
-</p> -->
+<!-- <footer>
+  <button class="back-to-top" (click)="scrollToLibrary()">&#94;</button>
+</footer> -->
