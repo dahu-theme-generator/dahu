@@ -2,9 +2,6 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { globalExtensionPath } from 'ext-src/extension';
-import { getPresets } from 'ext-src/dbConnector';
-import { Preset } from 'ext-src/dataObjects';
 
 @Component({
   selector: 'app-library',

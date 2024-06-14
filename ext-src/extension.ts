@@ -8,6 +8,8 @@ import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 import { applyPreset } from "./backgroundHighlighting";
 
 let globalExtensionPath: string;
+
+let currentDahuTheme: any;
 /**
  * Manages webview panels
  */
@@ -191,6 +193,9 @@ function enableTheme() {
  */
 export function activate(context: vscode.ExtensionContext) {
 	globalExtensionPath = context.extensionPath;
+	const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
+	currentDahuTheme = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+	console.log(currentDahuTheme);
 	// console.log("dahu is working...");
 	enableTheme();
 	context.subscriptions.push(
@@ -267,4 +272,4 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 }
 
-export {globalExtensionPath};
+export {globalExtensionPath, currentDahuTheme};

@@ -5,6 +5,7 @@ import { savePreset, getPresets, getPreset } from "./dbConnector";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 import { applyPreset } from "./backgroundHighlighting";
 let globalExtensionPath;
+let currentDahuTheme;
 /**
  * Manages webview panels
  */
@@ -138,6 +139,9 @@ function enableTheme() {
  */
 export function activate(context) {
     globalExtensionPath = context.extensionPath;
+    const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
+    currentDahuTheme = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+    console.log(currentDahuTheme);
     // console.log("dahu is working...");
     enableTheme();
     context.subscriptions.push(vscode.commands.registerCommand("dahu.start-webview", () => {
@@ -211,5 +215,5 @@ export function activate(context) {
         }
     }));
 }
-export { globalExtensionPath };
+export { globalExtensionPath, currentDahuTheme };
 //# sourceMappingURL=extension.js.map
