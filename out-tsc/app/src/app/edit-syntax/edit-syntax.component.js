@@ -14,9 +14,6 @@ let EditSyntaxComponent = class EditSyntaxComponent {
             { name: 'Color 7', hex: '#800080' },
             { name: 'Color 8', hex: '#808000' },
             { name: 'Color 9', hex: '#800000' },
-            { name: 'Color 10', hex: '#008080' },
-            { name: 'Color 8', hex: '#808000' },
-            { name: 'Color 9', hex: '#800000' },
             { name: 'Color 10', hex: '#008080' }
         ];
         this.displayedColors = [];
