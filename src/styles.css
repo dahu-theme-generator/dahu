@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* ----------------------Old  file
+ html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+:root {
+    --background-color: var(--vscode-editor-background);
+    --sidebar-background: var(--vscode-sideBar-background);
+    --sidebar-foreground: var(--vscode-sideBar-foreground);
+    --foreground-color: var(--vscode-editor-foreground);
+    --button-background: var(--vscode-button-background);
+    --button-foreground: var(--vscode-button-foreground);
+    --editor-font-family: var(--vscode-sideBar-font-family);
+    --editor-font-weight: var(--vscode-sideBar-font-weight);
+    /* Add more as needed */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+}
+
+button {
+    background-color: var(--button-background);
+    color: var(--button-foreground);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

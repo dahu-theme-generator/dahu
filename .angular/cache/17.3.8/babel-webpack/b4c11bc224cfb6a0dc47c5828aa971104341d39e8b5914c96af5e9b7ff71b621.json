@@ -1,0 +1,1 @@
+{"ast":null,"code":"module.exports = require('bindings')('node_sqlite3.node');","map":null,"metadata":{},"sourceType":"script","externalDependencies":[]}

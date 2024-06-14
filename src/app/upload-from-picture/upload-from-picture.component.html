@@ -1,0 +1,10 @@
+<div class="image-upload">
+    <h2>Upload a Picture</h2>
+  
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  
+    <div *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Uploaded Image">
+    </div>
+  </div>
+  

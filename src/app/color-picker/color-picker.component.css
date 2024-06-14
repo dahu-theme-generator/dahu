@@ -1,0 +1,10 @@
+.color-wheel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+canvas {
+  border-radius: 50%;
+  cursor: crosshair;
+}

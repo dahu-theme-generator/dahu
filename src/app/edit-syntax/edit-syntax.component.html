@@ -1,0 +1,22 @@
+<div class="general">
+    <h2>Edit Syntax</h2>
+  
+    <div class="color-boxes">
+        <div class="pagination-buttons">
+            <button (click)="previousPage()" [disabled]="currentPage === 0">&#8249;</button>
+          </div>
+      <div *ngFor="let color of displayedColors; let i = index" class="color-item">
+        <h3>{{ color.name }}</h3>
+        <div class="color-box" [style.backgroundColor]="color.hex"></div>
+        <input
+          type="text"
+          [value]="color.hex"
+          (input)="updateColor($event.target.value, i + currentPage * 5)"
+        />
+      </div>
+      <div class="pagination-buttons">
+        <button (click)="nextPage()" [disabled]="(currentPage + 1) * 5 >= colors.length">&#8250;</button>
+      </div>
+    </div>
+    <button (click)="saveColors()">Save</button>
+  </div>
