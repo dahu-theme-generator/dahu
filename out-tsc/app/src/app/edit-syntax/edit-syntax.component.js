@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 let EditSyntaxComponent = class EditSyntaxComponent {
     constructor() {
-        this.vscode = window.acquireVsCodeApi();
         this.colors = [
             { name: 'Color 1', hex: '#FF0000' },
             { name: 'Color 2', hex: '#00FF00' },

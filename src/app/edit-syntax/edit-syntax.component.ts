@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { currentDahuTheme} from 'ext-src/extension';
-
 @Component({
   selector: 'app-edit-syntax',
   standalone: true,
@@ -12,7 +9,6 @@ import { currentDahuTheme} from 'ext-src/extension';
   styleUrl: './edit-syntax.component.css'
 })
 export class EditSyntaxComponent {
-  vscode: any = (window as any).acquireVsCodeApi();
   colors = [
     { name: 'Color 1', hex: '#FF0000' },
     { name: 'Color 2', hex: '#00FF00' },
