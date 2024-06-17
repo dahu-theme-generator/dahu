@@ -5,6 +5,7 @@ import { savePreset, getPresets, getPreset } from "./dbConnector";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 import { applyPreset } from "./backgroundHighlighting";
 let globalExtensionPath;
+let currentDahuTheme;
 /**
  * Manages webview panels
  */
@@ -140,6 +141,23 @@ export function activate(context) {
     globalExtensionPath = context.extensionPath;
     // console.log("dahu is working...");
     enableTheme();
+    const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
+    try {
+        const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+        currentDahuTheme = {
+            id: 0,
+            name: 'initial-theme',
+            editorColor: themeData.colors['editor.background'],
+            sidebarColor: themeData.colors['sideBar.background'],
+            panelColor: themeData.colors['panel.background'],
+            statusBarColor: themeData.colors['statusBar.background'],
+            tabsColor: themeData.colors['editorGroupHeader.tabsBackground'],
+            tokenColors: JSON.parse(themeData.tokenColors)
+        };
+    }
+    catch (error) {
+        console.log('error while creating current theme object: ' + error.message);
+    }
     context.subscriptions.push(vscode.commands.registerCommand("dahu.start-webview", () => {
         WebPanel.createOrShow(context.extensionPath);
     }), vscode.commands.registerCommand("dahu.savePreset", async () => {
