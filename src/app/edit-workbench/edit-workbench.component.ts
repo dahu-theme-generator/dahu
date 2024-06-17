@@ -26,7 +26,6 @@ export class EditWorkbenchComponent {
   constructor(vsCodeApiService: VsCodeApiService) {
     this.vscode = vsCodeApiService.getVsCodeApi();
     this.getCurrentTheme();
-    this.getCurrentTheme();
     window.addEventListener('message', event => {
       const message = event.data;
       if(message.command === 'currentTheme') {
