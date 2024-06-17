@@ -13,11 +13,18 @@ let EditWorkbenchComponent = class EditWorkbenchComponent {
         ];
         this.vscode = vsCodeApiService.getVsCodeApi();
         this.getCurrentTheme();
-        this.getCurrentTheme();
         window.addEventListener('message', event => {
             const message = event.data;
             if (message.command === 'currentTheme') {
                 console.log('RECEIVED OBJ: ', message.data);
+                const currentTheme = message.data;
+                this.colors = [
+                    { name: 'Editor', hex: currentTheme.editorColor },
+                    { name: 'Side Bar', hex: currentTheme.sidebarColor },
+                    { name: 'Panel', hex: currentTheme.panelColor },
+                    { name: 'Status Bar', hex: currentTheme.statusBarColor },
+                    { name: 'Tabs', hex: currentTheme.tabsColor },
+                ];
             }
         });
     }

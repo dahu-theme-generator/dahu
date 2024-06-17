@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { VsCodeApiService } from 'src/vsCodeAPIService';
+import { Preset } from 'ext-src/dataObjects';
 
 @Component({
   selector: 'app-edit-workbench',
@@ -26,11 +27,18 @@ export class EditWorkbenchComponent {
   constructor(vsCodeApiService: VsCodeApiService) {
     this.vscode = vsCodeApiService.getVsCodeApi();
     this.getCurrentTheme();
-    this.getCurrentTheme();
     window.addEventListener('message', event => {
       const message = event.data;
       if(message.command === 'currentTheme') {
         console.log('RECEIVED OBJ: ', message.data);
+        const currentTheme: Preset = message.data;
+        this.colors = [
+          { name: 'Editor', hex: currentTheme.editorColor },
+          { name: 'Side Bar', hex: currentTheme.sidebarColor },
+          { name: 'Panel', hex: currentTheme.panelColor },
+          { name: 'Status Bar', hex: currentTheme.statusBarColor },
+          { name: 'Tabs', hex: currentTheme.tabsColor },
+        ];
       }
     });
   }

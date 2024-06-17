@@ -77,8 +77,8 @@ async function getPreset(name: string, extensionPath: string): Promise<Preset> {
                 } else {
                     resolve(row);
                 }
-            })
-        })
+            });
+        });
     } catch(error) {
         console.log('error while fetching preset with name ' + name + 'from db: ' + (error as Error).message);
         throw error;

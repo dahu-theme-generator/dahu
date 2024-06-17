@@ -90,6 +90,7 @@ class WebPanel {
                     console.log('apply preset called');
                     await getPreset(message.data.theme, extensionPath)
                         .then(preset => {
+                        console.log('received preset from db: (extension.ts): ', preset);
                         applyPreset(preset);
                         vscode.window.showInformationMessage('preset applied: ' + preset.name);
                     })
@@ -155,10 +156,8 @@ export function activate(context) {
             panelColor: themeData.colors['panel.background'],
             statusBarColor: themeData.colors['statusBar.background'],
             tabsColor: themeData.colors['editorGroupHeader.tabsBackground'],
-            // tokenColors: JSON.stringify(themeData.tokenColors)
             tokenColors: themeData.tokenColors
         };
-        console.log('CURRENT DAHU THEME: (extension.ts)', currentDahuTheme);
     }
     catch (error) {
         console.log('error while creating current theme object: ' + error.message);

@@ -14,6 +14,7 @@ function applyPreset(preset) {
     const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
     try {
         const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+        console.log('current editor background (before applying new color): ' + themeData.colors['editor.background']);
         themeData.colors['editor.background'] = preset.editorColor;
         themeData.colors['sideBar.background'] = preset.sidebarColor;
         themeData.colors['panel.background'] = preset.panelColor;
@@ -22,6 +23,9 @@ function applyPreset(preset) {
         let syntaxScopes = JSON.parse(preset.tokenColors);
         const scopesInJSON = syntaxScopes.map(scope => JSON.stringify(scope));
         themeData.tokenColors = scopesInJSON;
+        fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2), 'utf-8');
+        console.log('preset applied (backgroundHighlighting.ts): ' + preset.editorColor);
+        console.log('current editor background: ' + themeData.colors['editor.background']);
     }
     catch (error) {
         console.log('error while applying preset: ' + error.message);
