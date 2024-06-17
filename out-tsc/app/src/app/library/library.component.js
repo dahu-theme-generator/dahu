@@ -5,19 +5,41 @@ import { FormsModule } from '@angular/forms';
 let LibraryComponent = class LibraryComponent {
     constructor(vsCodeApiService) {
         this.themes = ['Theme 1', 'Theme 2', 'Theme 3']; // Replace with actual data fetching logic
+        this.presets = [];
         this.vscode = vsCodeApiService.getVsCodeApi();
         this.getPresets();
+        this.getCurrentTheme();
         window.addEventListener('message', event => {
             const message = event.data;
             if (message.command === 'presets') {
                 this.themes = message.data.map((p) => p.name);
+                this.presets = message.data;
             }
         });
+        window.addEventListener('message', event => {
+            const message = event.data;
+            if (message.command === 'currentTheme') {
+                console.log('RECEIVED OBJ: ', message.data);
+                this.currentTheme = message.data;
+            }
+        });
+        window.addEventListener('message', event => {
+            const message = event.data;
+            if (message.command === 'applyPreset') {
+                console.log('RECEIVED OBJ: ', message.data);
+                this.currentTheme = message.data;
+            }
+        });
+    }
+    getCurrentTheme() {
+        this.vscode.postMessage({ command: 'getCurrentTheme' });
+        console.log("Current theme!!!!!: ", this.currentTheme);
     }
     applyTheme(theme) {
         console.log('apply function called');
         // const vscode = (window as any).acquireVsCodeApi();
         this.vscode.postMessage({ command: 'applyPreset', data: { theme } });
+        this.getCurrentTheme();
     }
     getPresets() {
         // const vscode = (window as any).acquireVsCodeApi();
