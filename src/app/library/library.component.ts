@@ -20,23 +20,46 @@ export class LibraryComponent implements AfterViewInit {
   themes: string[] = ['Theme 1', 'Theme 2', 'Theme 3']; // Replace with actual data fetching logic
   // private vscode: any = (window as any).acquireVsCodeApi();
   private vscode: any;
+  presets: Preset[] = [];
+  currentTheme!: Preset;
 
   constructor(vsCodeApiService: VsCodeApiService) {
     this.vscode = vsCodeApiService.getVsCodeApi();
     this.getPresets();
+    this.getCurrentTheme();
     window.addEventListener('message', event => {
       const message = event.data;
       if (message.command === 'presets') {
           this.themes = message.data.map((p: any) => p.name);
+          this.presets = message.data;
       }
     });
-
+    window.addEventListener('message', event => {
+      const message = event.data;
+      if(message.command === 'currentTheme') {
+        console.log('RECEIVED OBJ: ', message.data);
+        this.currentTheme = message.data;
+      }
+    });
+    window.addEventListener('message', event => {
+      const message = event.data;
+      if(message.command === 'applyPreset') {
+        console.log('RECEIVED OBJ: ', message.data);
+        this.currentTheme = message.data;
+      }
+    });
   }
+ 
 
-  applyTheme(theme: string) {
+  getCurrentTheme() {
+    this.vscode.postMessage({command: 'getCurrentTheme'});
+    console.log("Current theme!!!!!: ", this.currentTheme);
+  }
+  applyTheme(theme: Preset) {
     console.log('apply function called');
     // const vscode = (window as any).acquireVsCodeApi();
     this.vscode.postMessage({ command: 'applyPreset', data: { theme }});
+    this.getCurrentTheme();
   }
 
   getPresets() {
