@@ -6,7 +6,7 @@ import { Preset } from "./dataObjects";
 
 import { globalExtensionPath } from "./extension";
 
-// let db = initDB();
+// let db = initDB()    ;
 
 // TODO: color change below
 // editor background

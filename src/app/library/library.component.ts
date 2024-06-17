@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { globalExtensionPath } from 'ext-src/extension';
 import { getPresets } from 'ext-src/dbConnector';
 import { Preset } from 'ext-src/dataObjects';
+import { VsCodeApiService } from 'src/vsCodeAPIService';
 
 @Component({
   selector: 'app-library',
@@ -17,9 +18,11 @@ export class LibraryComponent implements AfterViewInit {
   @ViewChild('editWorkbench', { static: false }) editWorkbench!: ElementRef;
 
   themes: string[] = ['Theme 1', 'Theme 2', 'Theme 3']; // Replace with actual data fetching logic
-  vscode: any = (window as any).acquireVsCodeApi();
+  // private vscode: any = (window as any).acquireVsCodeApi();
+  private vscode: any;
 
-  constructor() {
+  constructor(vsCodeApiService: VsCodeApiService) {
+    this.vscode = vsCodeApiService.getVsCodeApi();
     this.getPresets();
     window.addEventListener('message', event => {
       const message = event.data;

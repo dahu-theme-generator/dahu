@@ -3,9 +3,9 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 let LibraryComponent = class LibraryComponent {
-    constructor() {
+    constructor(vsCodeApiService) {
         this.themes = ['Theme 1', 'Theme 2', 'Theme 3']; // Replace with actual data fetching logic
-        this.vscode = window.acquireVsCodeApi();
+        this.vscode = vsCodeApiService.getVsCodeApi();
         this.getPresets();
         window.addEventListener('message', event => {
             const message = event.data;

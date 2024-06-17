@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { globalExtensionPath } from "./extension";
-// let db = initDB();
+// let db = initDB()    ;
 // TODO: color change below
 // editor background
 // sidebar background

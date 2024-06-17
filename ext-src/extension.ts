@@ -9,6 +9,8 @@ import { applyPreset } from "./backgroundHighlighting";
 
 let globalExtensionPath: string;
 let currentDahuTheme: Preset;
+
+
 /**
  * Manages webview panels
  */
@@ -132,6 +134,9 @@ class WebPanel {
 							.catch(error => {
 								console.log('error while applyin preset: ' + (error as Error).message);
 							});
+						break;
+					case 'getCurrentTheme':
+						this.panel.webview.postMessage({ command: 'currentTheme', data: currentDahuTheme })
                 }
             },
             null,
@@ -206,8 +211,10 @@ export function activate(context: vscode.ExtensionContext) {
 			panelColor: themeData.colors['panel.background'],
 			statusBarColor: themeData.colors['statusBar.background'],
 			tabsColor: themeData.colors['editorGroupHeader.tabsBackground'],
-			tokenColors: JSON.parse(themeData.tokenColors)
+			// tokenColors: JSON.stringify(themeData.tokenColors)
+			tokenColors: themeData.tokenColors
 		};
+		console.log('CURRENT DAHU THEME: (extension.ts)', currentDahuTheme);
 	} catch(error) {
 		console.log('error while creating current theme object: ' + (error as Error).message);
 	}

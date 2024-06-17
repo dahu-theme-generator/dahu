@@ -96,6 +96,9 @@ class WebPanel {
                         .catch(error => {
                         console.log('error while applyin preset: ' + error.message);
                     });
+                    break;
+                case 'getCurrentTheme':
+                    this.panel.webview.postMessage({ command: 'currentTheme', data: currentDahuTheme });
             }
         }, null, this.disposables);
     }
@@ -152,8 +155,10 @@ export function activate(context) {
             panelColor: themeData.colors['panel.background'],
             statusBarColor: themeData.colors['statusBar.background'],
             tabsColor: themeData.colors['editorGroupHeader.tabsBackground'],
-            tokenColors: JSON.parse(themeData.tokenColors)
+            // tokenColors: JSON.stringify(themeData.tokenColors)
+            tokenColors: themeData.tokenColors
         };
+        console.log('CURRENT DAHU THEME: (extension.ts)', currentDahuTheme);
     }
     catch (error) {
         console.log('error while creating current theme object: ' + error.message);

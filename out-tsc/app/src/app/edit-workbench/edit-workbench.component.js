@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 let EditWorkbenchComponent = class EditWorkbenchComponent {
-    constructor() {
+    constructor(vsCodeApiService) {
         this.colors = [
             { name: 'Color 1', hex: '#FF0000' },
             { name: 'Color 2', hex: '#00FF00' },
@@ -11,9 +11,26 @@ let EditWorkbenchComponent = class EditWorkbenchComponent {
             { name: 'Color 4', hex: '#FFFF00' },
             { name: 'Color 5', hex: '#FF00FF' }
         ];
+        this.vscode = vsCodeApiService.getVsCodeApi();
+        this.getCurrentTheme();
+        this.getCurrentTheme();
+        window.addEventListener('message', event => {
+            const message = event.data;
+            if (message.command === 'currentTheme') {
+                console.log('RECEIVED OBJ: ', message.data);
+            }
+        });
+    }
+    getCurrentTheme() {
+        this.vscode.postMessage({ command: 'getCurrentTheme' });
     }
     ngOnInit() {
         console.log('Initial colors:', this.colors);
+        // this.getCurrentTheme();
+        // window.addEventListener('message', event => {
+        //   const message = event.data;
+        //   console.log('received object: ', message.data);
+        // });
     }
     updateColor(newHex, index) {
         this.colors[index].hex = newHex;
