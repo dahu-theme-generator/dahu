@@ -17,14 +17,38 @@ let UploadFromPictureComponent = class UploadFromPictureComponent {
             this.imageUrl = reader.result;
         };
     }
+    onDragOver(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.classList.add('drag-over');
+    }
+    onDragLeave(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.classList.remove('drag-over');
+    }
+    onDrop(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.classList.remove('drag-over');
+        if (event.dataTransfer?.files.length) {
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                this.previewImage(file);
+            }
+        }
+    }
+    onDropZoneClick() {
+        const fileInput = document.getElementById('file-input');
+        fileInput.click();
+    }
 };
 UploadFromPictureComponent = __decorate([
     Component({
         selector: 'app-upload-from-picture',
         standalone: true,
-        imports: [],
         templateUrl: './upload-from-picture.component.html',
-        styleUrl: './upload-from-picture.component.css'
+        styleUrls: ['./upload-from-picture.component.css']
     })
 ], UploadFromPictureComponent);
 export { UploadFromPictureComponent };

@@ -1,15 +1,42 @@
 .image-upload {
-    text-align: center;
-  }
-  
-  input[type="file"] {
-    margin-top: 20px;
-  }
-  
-  img {
-    max-width: 300px;
-    max-height: 300px;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-  }
-  
+  text-align: center;
+}
+
+.drop-zone {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.drop-zone.drag-over {
+  border-color: #666;
+}
+
+.drop-zone p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.file-input {
+  display: none;
+}
+
+.preview {
+  margin-top: 10px;
+}
+
+.preview img {
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 10px;
+}

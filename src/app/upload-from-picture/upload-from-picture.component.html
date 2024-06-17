@@ -1,10 +1,19 @@
 <div class="image-upload">
-    <h2>Upload a Picture</h2>
+  <h2>Upload a Picture</h2>
   
-    <input type="file" (change)="onFileSelected($event)" accept="image/*">
-  
-    <div *ngIf="imageUrl">
-      <img [src]="imageUrl" alt="Uploaded Image">
-    </div>
+  <!-- Drag and Drop Area -->
+  <div 
+    class="drop-zone" 
+    id="drop-zone" 
+    (dragover)="onDragOver($event)" 
+    (dragleave)="onDragLeave($event)" 
+    (drop)="onDrop($event)" 
+    (click)="onDropZoneClick()">
+    <p>Drag & drop an image here, or click to select one</p>
+    <input type="file" id="file-input" accept="image/*" style="display: none;" (change)="onFileSelected($event)">
   </div>
-  
+
+  <div id="preview" class="preview" *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="Image preview">
+  </div>
+</div>
