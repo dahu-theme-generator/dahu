@@ -130,6 +130,7 @@ class WebPanel {
 							.then(preset=> {
 								console.log('received preset from db: (extension.ts): ', preset);
 								applyPreset(preset);
+								currentDahuTheme = preset;
 								vscode.window.showInformationMessage('preset applied: ' + preset.name);
 							})
 							.catch(error => {
@@ -137,7 +138,7 @@ class WebPanel {
 							});
 						break;
 					case 'getCurrentTheme':
-						this.panel.webview.postMessage({ command: 'currentTheme', data: currentDahuTheme })
+						this.panel.webview.postMessage({ command: 'currentTheme', data: currentDahuTheme });
                 }
             },
             null,
