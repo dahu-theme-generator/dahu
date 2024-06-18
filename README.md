@@ -48,15 +48,4 @@ This extension uses some APIs to provide functionality of generating colors from
 
 ## Extension Settings
 ### TODO: add settings??
-
-## Running
-
-- ```npm i```
-- ```npm run build```
-- ```F5```
-- in the new window ```shift``` + ```ctrl``` + ```p``` select ```Open webview``` for webview preview.
-
-### Notes for developers
-
-Colors of the extension are automatically adapted based on the current vs code theme. To add more colors you can access global css variables in src/styles.css inside ```:root{}```. More styles can be found at https://code.visualstudio.com/api/references/theme-color. Change ```.``` to  ```-```.
 **Enjoy!**
