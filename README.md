@@ -47,5 +47,5 @@ For other languages, it might not highlight the code syntax fully -> look for fu
 This extension uses some APIs to provide functionality of generating colors from a base color or image. For generating color palette from a base color, we used [Palette.es API](https://palett.es/about), and for creating set of colors from a image we chose [Color Thief API](https://lokeshdhakar.com/projects/color-thief/#examples).
 
 ## Extension Settings
-### TODO: add settings??
+Currently, extension does not have any settings -> look for future updates
 **Enjoy!**
