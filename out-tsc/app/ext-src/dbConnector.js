@@ -59,6 +59,23 @@ function savePreset(name, extensionPath) {
         }
     });
 }
+function updatePreset(preset, extensionPath) {
+    const db = initDB(extensionPath);
+    const sql = `
+        UPDATE presets
+        SET editorColor = ?, sidebarColor = ?, panelColor = ?, statusBarColor = ?, tabsColor = ?, tokenColors = ?
+        WHERE name = ?`;
+    return new Promise((resolve, reject) => {
+        db.get(sql, [preset.editorColor, preset.sidebarColor, preset.panelColor, preset.statusBarColor, preset.tabsColor, preset.tokenColors, preset.name], (error) => {
+            if (error) {
+                reject(error);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
+}
 async function getPreset(name, extensionPath) {
     try {
         const db = initDB(extensionPath);
@@ -110,5 +127,5 @@ function closeDB(db) {
         }
     });
 }
-export { initDB, closeDB, savePreset, getPresets, getPreset };
+export { initDB, closeDB, savePreset, getPresets, getPreset, updatePreset };
 //# sourceMappingURL=dbConnector.js.map
