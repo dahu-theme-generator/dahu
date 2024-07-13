@@ -12,7 +12,7 @@ app/**/*.js.map
 # dependencies
 node_modules/
 bower_components/
-.angular/cache/*
+.angular/cache/
 
 # IDEs and editors
 .idea/

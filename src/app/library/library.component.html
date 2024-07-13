@@ -4,7 +4,7 @@
       <div *ngFor="let preset of presets" class="theme-block">
        <div> {{ preset.name }}</div>
         <div class="theme-buttons">
-            <button class="theme-button" (click)="applyTheme(preset.name)">Apply</button>
+            <button class="theme-button" *ngIf="preset.id != currentTheme.id" (click)="applyTheme(preset.name)">Apply</button>
             <button class="theme-button" *ngIf="preset.id === currentTheme.id" (click)="scrollToEditWorkbench()">Edit</button>
           </div>
       </div>
