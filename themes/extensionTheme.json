@@ -3,7 +3,7 @@
   "type": "vs-dark",
   "colors": {
     "editor.background": "#000000",
-    "sideBar.background": "#000000",
+    "sideBar.background": "#0000ff",
     "panel.background": "#000000",
     "statusBar.background": "#ffffff",
     "editorGroupHeader.tabsBackground": "#000000"

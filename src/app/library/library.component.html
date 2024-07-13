@@ -7,6 +7,7 @@
             <button class="theme-button" *ngIf="preset.id != currentTheme.id" (click)="applyTheme(preset.name)">Apply</button>
             <button class="theme-button" *ngIf="preset.id === currentTheme.id" (click)="scrollToEditWorkbench()">Edit</button>
           </div>
+          <div *ngIf="preset.id === currentTheme.id" class="current-indicator">--current</div>
       </div>
       
     </div>

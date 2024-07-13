@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-import { savePreset, getPresets, getPreset} from "./dbConnector";
+import { savePreset, getPresets, getPreset, updatePreset} from "./dbConnector";
 import { Preset } from "./dataObjects";
 import { generatePalette, getColorPalleteFromImage } from "./colorGenerator";
 import { applyPreset } from "./backgroundHighlighting";
@@ -116,6 +116,15 @@ class WebPanel {
                         const presets = await getPresets(extensionPath);
                         this.panel.webview.postMessage({ command: 'presets', data: presets });
                         break;
+					case 'updatePreset':
+						try {
+                            await updatePreset( message.data, extensionPath);
+                            vscode.window.showInformationMessage('Preset updated successfully');
+                        } catch (error) {
+                            vscode.window.showErrorMessage('Error updating preset: ' + (error as Error).message);
+                        }
+						this.panel.webview.postMessage({command: 'applyPreset', data: message.data});
+                        break;
                     case 'savePreset':
                         try {
                             await savePreset(message.data.name, extensionPath);
@@ -223,6 +232,8 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand("dahu.start-webview", () => {
 			WebPanel.createOrShow(context.extensionPath);
 		}),
+
+
 		vscode.commands.registerCommand("dahu.savePreset", async () => {
 			const presetName = await vscode.window.showInputBox({prompt: 'enter ur preset name'});
 			if(presetName) {
@@ -238,6 +249,8 @@ export function activate(context: vscode.ExtensionContext) {
 				console.log('the name was null...');
 			}
 		}),
+
+
 
 		// TODO: remove the following 3 commands, these are just for debugging purposes
 		

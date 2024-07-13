@@ -8,10 +8,15 @@ dist/
 tmp/
 app/**/*.js
 app/**/*.js.map
+out-tsc/app/**/*.js
+out-tsc/app/**/*.js.map
+
 
 # dependencies
 node_modules/
 bower_components/
+
+# Anfular chache
 .angular/cache/
 
 # IDEs and editors

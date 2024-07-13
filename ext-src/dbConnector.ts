@@ -38,7 +38,7 @@ function savePreset(name: string, extensionPath: string): Promise<void> {
         }
 
         try {
-            const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+             const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
             const editor = themeData.colors['editor.background'];
             const sidebar = themeData.colors['sideBar.background'];
             const panel = themeData.colors['panel.background'];
