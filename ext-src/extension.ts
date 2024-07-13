@@ -281,6 +281,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let palette: string[] = [];
 			if(fileUri && fileUri[0]) {
 				try {
+					console.log('type of file: ' + typeof(fileUri[0]));
 					palette = await getColorPalleteFromImage(fileUri[0]);
 					console.log('success, color palette generated from image:');
 					palette.forEach(color => console.log(color));
