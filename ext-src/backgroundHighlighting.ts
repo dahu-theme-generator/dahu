@@ -18,25 +18,66 @@ import { globalExtensionPath } from "./extension";
 
 
 function applyPreset(preset: Preset) {
+
+
+    //Workbench colors
+    const newColors = {
+        'editor.background': preset.editorColor,
+        'sideBar.background': preset.sidebarColor,
+        'panel.background': preset.panelColor,
+        'statusBar.background': preset.statusBarColor,
+        'editorGroupHeader.tabsBackground': preset.tabsColor
+    };
+
+    //Syntax colors
     const themePath = path.join(globalExtensionPath, 'themes', 'extensionTheme.json');
-    try {
-        const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
-        console.log('current editor background (before applying new color): ' + themeData.colors['editor.background']);
-        themeData.colors['editor.background'] = preset.editorColor;
-        themeData.colors['sideBar.background'] = preset.sidebarColor;
-        themeData.colors['panel.background'] = preset.panelColor;
-        themeData.colors['statusBar.background'] = preset.statusBarColor;
-        themeData.colors['editorGroupHeader.tabsBackground'] = preset.tabsColor;
-        let syntaxScopes: { scope: string | string[], settings: { foreground: string } }[] = JSON.parse(preset.tokenColors);
-        const scopesInJSON: string[] = syntaxScopes.map(scope => JSON.stringify(scope));
-        themeData.tokenColors = scopesInJSON;
-        fs.writeFileSync(themePath, JSON.stringify(themeData, null, 2), 'utf-8');
-        console.log('preset applied (backgroundHighlighting.ts): ' + preset.editorColor);
-        console.log('current editor background: ' + themeData.colors['editor.background']);
-    } catch(error) {
-        console.log('error while applying preset: ' + (error as Error).message);
-    }
+    const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+    const newTokenColors = {
+        "textMateRules": themeData.tokenColors.map((color: string) => JSON.parse(color))
+    };
+    
+
+    //call to update methods
+    updateColorCustomization(newColors);
+    updateTokenColorCustomization(newTokenColors);
 }
+function updateColorCustomization(newColors: { [key: string]: string }) {
+    const config = vscode.workspace.getConfiguration();
+    
+    // Get the current color customizations
+    const currentColorCustomizations = config.get<any>('workbench.colorCustomizations') || {};
+
+    // Merge the new colors with the existing ones
+    const updatedColorCustomizations = {
+        ...currentColorCustomizations,
+        ...newColors
+    };
+
+    // Update the configuration
+    config.update('workbench.colorCustomizations', updatedColorCustomizations, vscode.ConfigurationTarget.Global)
+        .then(() => {
+            vscode.window.showInformationMessage('Color customizations updated.');
+        }, (err) => {
+            vscode.window.showErrorMessage(`Failed to update color customizations: ${err.message}`);
+        });
+}
+function updateTokenColorCustomization(newTokenColors: { [key: string]: any }) {
+    const config = vscode.workspace.getConfiguration();
+    const currentTokenColorCustomizations = config.get<any>('editor.tokenColorCustomizations') || {};
+    const updatedTokenColorCustomizations = {
+        ...currentTokenColorCustomizations,
+        ...newTokenColors
+    };
+
+    config.update('editor.tokenColorCustomizations', updatedTokenColorCustomizations, vscode.ConfigurationTarget.Global)
+        .then(() => {
+            vscode.window.showInformationMessage('Token color customizations updated.');
+        }, (err) => {
+            vscode.window.showErrorMessage(`Failed to update token color customizations: ${err.message}`);
+        });
+}
+
+
 
 function changeEditor(color: string, context: vscode.ExtensionContext) {
     const config = vscode.workspace.getConfiguration();

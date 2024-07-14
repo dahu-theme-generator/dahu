@@ -119,6 +119,7 @@ class WebPanel {
 					case 'updatePreset':
 						try {
                             await updatePreset( message.data, extensionPath);
+							await applyPreset(message.data);
                             vscode.window.showInformationMessage('Preset updated successfully');
                         } catch (error) {
                             vscode.window.showErrorMessage('Error updating preset: ' + (error as Error).message);
@@ -138,6 +139,7 @@ class WebPanel {
 						await getPreset(message.data.theme, extensionPath)
 							.then(preset=> {
 								console.log('received preset from db: (extension.ts): ', preset);
+								updatePreset(message.data, extensionPath);
 								applyPreset(preset);
 								currentDahuTheme = preset;
 								this.panel.webview.postMessage({ command: 'currentTheme', data: currentDahuTheme });
